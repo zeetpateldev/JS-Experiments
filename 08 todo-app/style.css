@@ -177,6 +177,7 @@ header p {
     flex: 1;
     font-size: 1rem;
     transition: all 0.2s;
+    cursor: pointer;
 }
 
 .todo-item.completed .todo-item-text {

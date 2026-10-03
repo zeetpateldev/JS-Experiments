@@ -22,7 +22,7 @@ function AddTodo() {
   if (!taskInput.value.trim()) return null;
 
   const todoItem = {
-    key: date.now,
+    key: Date.now(),
     task: taskInput.value,
     completed: false
   }
@@ -42,6 +42,7 @@ function saveTodos(todos) {
 
 function displayTodos(todos) {
 
+
   if (todos.length <= 0) {
     emptyState.classList.remove("hidden");
   } else {
@@ -53,15 +54,21 @@ function displayTodos(todos) {
     const li = document.createElement("li");
     li.classList.add("todo-item");
     li.innerHTML = `
-      <label class="checkbox-container">
-        <input type="checkbox" class="todo-checkbox" />
+      <div class="checkbox-container">
+        <input type="checkbox" class="todo-checkbox" id="${todo.key}" onchange="updateTaskComplete(${todo.key})" />
         <span class="checkmark"></span>
-      </label>
-      <span class="todo-item-text">${todo.task || 'Draft'}</span>
+      </div>
+      <label class="todo-item-text" for="${todo.key}">${todo.task || 'Draft'}</label>
       <button class="delete-btn"><i class="fas fa-times"></i></button>
     `;
     todosList.append(li);
   })
+}
+
+window.updateTaskComplete = updateTaskComplete;
+
+function updateTaskComplete(taskKey) {
+  console.log(taskKey)
 }
 
 function updateItemsCount(todos) {
